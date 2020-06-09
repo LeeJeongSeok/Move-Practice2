@@ -30,7 +30,7 @@
 
 - update() 화면을 지우고 다시 paint()를 호출한다
 
-  ![repaint()](/Users/jeongseok/Library/Application Support/typora-user-images/스크린샷 2020-06-09 오후 11.10.53.png)
+  ![](https://images.velog.io/images/ljs0429777/post/54b84c73-f651-4f17-8ea1-4ac8f5c1279c/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202020-06-09%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.13.22.png)
 
   ```
   * If this component is a lightweight component, this method
