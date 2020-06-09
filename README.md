@@ -1,5 +1,3 @@
-
-
 # Move-Practice2
 
 스네이크 게임을 만들기 전에 필요한 기술들을 연습하는 프로젝트입니다. - 2
@@ -44,5 +42,33 @@
 
   
 
-### 뱀 움직이기
+### 뱀 생성하기
 
+- x,y 좌표 값을 배열로 하는 이유
+
+  아직까진 나의 생각이지만 자바 GUI에선 x,y좌표로 컴포넌트들을 배치를 한다. 우리가 그릴려고 하는 뱀도 x,y좌표로 그린다. 하지만 뱀은 사용자 키보드 이벤트에 의해 x,y 좌표 값이 변한다 그렇기에 각 좌표별로 배열을 만들어 이벤트가 감지될때마다 값을 증가 시킨다
+
+- 뱀 생성 코드
+
+  ```java
+  private void doDrawing(Graphics g) {
+  
+      if (true) {
+  
+          g.drawImage(apple, apple_x, apple_y, this);
+  
+          for (int i = 0; i < dots; i++) {
+              if (i == 0) {
+                  g.drawImage(head, x[i], y[i], this);
+              }else {
+                  g.drawImage(tail, x[i], y[i], this);
+              }
+          }
+      } else {
+          System.out.println("doDrawing 실패");
+      }
+  
+  }
+  ```
+
+  i의 값이 0인 경우는 뱀의 머리를 의미하기에 분기문을 이용하여 머리부분과 꼬리부분을 나눠서 생성한다.

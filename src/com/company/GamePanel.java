@@ -9,18 +9,24 @@ public class GamePanel extends JPanel implements KeyListener {
 
     private final int B_WIDTH = 300;
     private final int B_HEIGHT = 300;
+    private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
+    private final int RAND_POS = 29;
 
+    // x,y 좌표값
+    // 왜 배열을 쓸까?
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
+
+    private int dots;
+    private int apple_x;
+    private int apple_y;
 
     private Image head;
     private Image tail;
     private Image apple;
 
-    private int dots;
-    private int apple_x;
-    private int apple_y;
+
 
 
     public GamePanel() {
@@ -72,21 +78,38 @@ public class GamePanel extends JPanel implements KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        System.out.println("paintComponent 호출");
-
-        g.drawImage(head, 150, 100, this);
-        g.drawImage(tail, 200, 100, this);
-
-        g.drawImage(apple, apple_x, apple_y, this);
+       doDrawing(g);
 
         repaint();
+    }
+
+    private void doDrawing(Graphics g) {
+
+        if (true) {
+
+            g.drawImage(apple, apple_x, apple_y, this);
+
+            for (int i = 0; i < dots; i++) {
+                if (i == 0) {
+                    g.drawImage(head, x[i], y[i], this);
+                }else {
+                    g.drawImage(tail, x[i], y[i], this);
+                }
+            }
+        } else {
+            System.out.println("doDrawing 실패");
+        }
+
     }
 
     // 위치값만 설정
     private void locateApple() {
 
-        apple_x = 50;
-        apple_y = 50;
+        int x = (int) (Math.random() * RAND_POS);
+        apple_x = ((x * DOT_SIZE));
+
+        int y = (int) (Math.random() * RAND_POS);
+        apple_y = ((y * DOT_SIZE));
     }
 
 
