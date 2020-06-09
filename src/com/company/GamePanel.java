@@ -24,10 +24,14 @@ public class GamePanel extends JPanel implements KeyListener {
 
 
     public GamePanel() {
+        System.out.println("생성자 호출");
+
         initBoard();
     }
 
     private void initBoard() {
+
+        System.out.println("initBoard 호출");
 
         addKeyListener(this);
         setBackground(Color.black);
@@ -68,10 +72,14 @@ public class GamePanel extends JPanel implements KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        System.out.println("paintComponent 호출");
+
         g.drawImage(head, 150, 100, this);
         g.drawImage(tail, 200, 100, this);
 
         g.drawImage(apple, apple_x, apple_y, this);
+
+        repaint();
     }
 
     // 위치값만 설정
