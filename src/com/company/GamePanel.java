@@ -2,10 +2,12 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class GamePanel extends JPanel implements KeyListener {
+public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
     private final int B_WIDTH = 300;
     private final int B_HEIGHT = 300;
@@ -21,6 +23,12 @@ public class GamePanel extends JPanel implements KeyListener {
     private int dots;
     private int apple_x;
     private int apple_y;
+
+    private boolean leftDirection = false;
+    private boolean rightDirection = true;
+    private boolean upDirection = false;
+    private boolean downDirection = false;
+    private boolean inGame = true;
 
     private Image head;
     private Image tail;
@@ -102,6 +110,10 @@ public class GamePanel extends JPanel implements KeyListener {
 
     }
 
+    private void move() {
+
+    }
+
     // 위치값만 설정
     private void locateApple() {
 
@@ -110,6 +122,11 @@ public class GamePanel extends JPanel implements KeyListener {
 
         int y = (int) (Math.random() * RAND_POS);
         apple_y = ((y * DOT_SIZE));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        move();
     }
 
 
@@ -121,10 +138,41 @@ public class GamePanel extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println(e.getKeyCode());
+
+        if (e.getKeyCode() ==  KeyEvent.VK_RIGHT) {
+            rightDirection = true;
+            leftDirection = false;
+            upDirection = false;
+            downDirection = false;
+        }
+
+        if (e.getKeyCode() ==  KeyEvent.VK_LEFT) {
+            rightDirection = false;
+            leftDirection = true;
+            upDirection = false;
+            downDirection = false;
+        }
+
+        if (e.getKeyCode() ==  KeyEvent.VK_UP) {
+            rightDirection = false;
+            leftDirection = false;
+            upDirection = true;
+            downDirection = false;
+        }
+
+        if (e.getKeyCode() ==  KeyEvent.VK_DOWN) {
+            rightDirection = false;
+            leftDirection = false;
+            upDirection = false;
+            downDirection = true;
+        }
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
 
     }
+
+
 }
