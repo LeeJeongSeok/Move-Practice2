@@ -14,6 +14,10 @@
 
 - paintComponent는 paint 메소드를 좀 더 세분화하여 만든 메소드이다(Swing)
 
+  - paintComponent
+  - paintChildren
+  - paintBorder
+
 - paint 메소드 실행 주체(JVM)
 
 - paint 메소드가 호출되는 시점 -> awt 스레드에 의해 자동으로 호출뭐시기
@@ -25,6 +29,8 @@
 - repaint() awt 스레드에게 화면을 갱신할 것을 요청한다. awt 스레드는 0.1초마다 확인해서 요청이 있으면 update()를 호출한다
 
 - update() 화면을 지우고 다시 paint()를 호출한다
+
+  ![repaint()](/Users/jeongseok/Library/Application Support/typora-user-images/스크린샷 2020-06-09 오후 11.10.53.png)
 
   ```
   * If this component is a lightweight component, this method
