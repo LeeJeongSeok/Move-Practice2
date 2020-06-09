@@ -72,3 +72,9 @@
   ```
 
   i의 값이 0인 경우는 뱀의 머리를 의미하기에 분기문을 이용하여 머리부분과 꼬리부분을 나눠서 생성한다.
+
+### 뱀 움직이기
+
+- actionPerformed(ActionEvent e) - ActionEvent가 발생하면 호출
+
+  KeyListener를 구현하여 사용중이기때문에 키보드 이벤트가 발생할때마다 ActionEvent가 발생한다 즉. 키보드 이벤트 값에 따라 변화되는 값들은 ActionEvent 메소드 안에 구현하면 되는 것이다.
