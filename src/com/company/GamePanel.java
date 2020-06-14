@@ -35,8 +35,6 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     private Image apple;
 
 
-
-
     public GamePanel() {
         System.out.println("생성자 호출");
 
@@ -88,7 +86,6 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
        doDrawing(g);
 
-        repaint();
     }
 
     private void doDrawing(Graphics g) {
@@ -112,7 +109,28 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
     private void move() {
 
+        for (int z = dots; z > 0; z--) {
+            x[z] = x[(z - 1)];
+            y[z] = y[(z - 1)];
+        }
+
+        if (leftDirection) {
+            x[0] -= DOT_SIZE;
+        }
+
+        if (rightDirection) {
+            x[0] += DOT_SIZE;
+        }
+
+        if (upDirection) {
+            y[0] -= DOT_SIZE;
+        }
+
+        if (downDirection) {
+            y[0] += DOT_SIZE;
+        }
     }
+
 
     // 위치값만 설정
     private void locateApple() {
@@ -126,7 +144,12 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        System.out.println("test");
+
         move();
+
+
     }
 
 
