@@ -147,6 +147,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
         System.out.println("test");
 
+
         move();
 
 
