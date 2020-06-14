@@ -78,3 +78,5 @@
 - actionPerformed(ActionEvent e) - ActionEvent가 발생하면 호출
 
   KeyListener를 구현하여 사용중이기때문에 키보드 이벤트가 발생할때마다 ActionEvent가 발생한다 즉. 키보드 이벤트 값에 따라 변화되는 값들은 ActionEvent 메소드 안에 구현하면 되는 것이다.
+  
+### 뱀 
