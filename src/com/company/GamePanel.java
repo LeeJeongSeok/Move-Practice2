@@ -1,11 +1,14 @@
 package com.company;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import static javax.swing.text.StyleConstants.setBackground;
 
 public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
@@ -21,6 +24,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     private final int y[] = new int[ALL_DOTS];
 
     private int dots;
+    private int score;
     private int apple_x;
     private int apple_y;
 
@@ -30,6 +34,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     private boolean downDirection = false;
     private boolean inGame = true;
 
+    private Timer timer;
     private Image head;
     private Image tail;
     private Image apple;
@@ -78,19 +83,22 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
         locateApple();
 
+        timer = new Timer(140, this);
+        timer.start();
+
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-       doDrawing(g);
+        doDrawing(g);
 
     }
 
     private void doDrawing(Graphics g) {
 
-        if (true) {
+        if (inGame) {
 
             g.drawImage(apple, apple_x, apple_y, this);
 
@@ -101,10 +109,22 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
                     g.drawImage(tail, x[i], y[i], this);
                 }
             }
+
+            Toolkit.getDefaultToolkit().sync();
+
         } else {
-            System.out.println("doDrawing 실패");
+            gameOver(g);
         }
 
+    }
+
+    private void checkApple() {
+        //
+        if (x[0] == apple_x && y[0] == apple_y) {
+            dots++;
+            score += 10;
+            locateApple();
+        }
     }
 
     private void move() {
@@ -131,8 +151,56 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         }
     }
 
+    private void checkCollision() {
 
-    // 위치값만 설정
+
+        if (x[0] >= B_WIDTH) {
+            inGame = false;
+        }
+
+        if (y[0] >= B_HEIGHT) {
+            inGame = false;
+        }
+
+        if (x[0] <= 0) {
+            inGame = false;
+        }
+
+        if (y[0] <= 0) {
+            inGame = false;
+        }
+
+        if (!inGame) {
+            timer.stop();
+        }
+
+        System.out.println("inGame status : " + inGame);
+
+    }
+
+    private void gameOver(Graphics g) {
+
+        String msg = "Game Over";
+        String scores = "Scores : " + score;
+        String retry = "Retry? press the enter";
+        Font small = new Font("Helvetica", Font.BOLD, 14);
+
+        FontMetrics metr = getFontMetrics(small);
+        FontMetrics metr2 = getFontMetrics(small);
+        FontMetrics metr3 = getFontMetrics(small);
+
+        g.setColor(Color.white);
+        g.setFont(small);
+        g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+        g.drawString(scores, (B_WIDTH - metr2.stringWidth(scores)) / 2, 170);
+        g.drawString(retry, (B_WIDTH - metr3.stringWidth(retry)) / 2, 190);
+
+
+    }
+
+
+
+    // 사과 위치값만 설정
     private void locateApple() {
 
         int x = (int) (Math.random() * RAND_POS);
@@ -145,12 +213,12 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        System.out.println("test");
-
-
-        move();
-
-
+        if (inGame) {
+            checkApple();
+            checkCollision();
+            move();
+        }
+        repaint();
     }
 
 
@@ -189,6 +257,20 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
             leftDirection = false;
             upDirection = false;
             downDirection = true;
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!inGame) {
+                inGame = true;
+
+                rightDirection = true;
+                leftDirection = false;
+                upDirection = false;
+                downDirection = false;
+
+                initGame();
+            }
+
         }
 
     }
